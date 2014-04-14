@@ -1,0 +1,13 @@
+all:
+	gcc -o shell -g -m32 shell.c
+	gcc matmult_p.c -lm -o matmult_p
+	gcc matmult_t.c -lm -o matmult_t
+	gcc multiply.c -lm -o multiply
+	gcc matformatter.c -lm -o matformatter
+
+clean:
+	rm shell
+	rm matmult_p
+	rm matmult_t
+	rm multiply
+	rm matformatter
