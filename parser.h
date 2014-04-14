@@ -43,7 +43,7 @@ void Parser(char buffer[], char* tokens[], int * index, int * again, int * in, i
                 *again = *index;
                 tokens[*index] = NULL;
                 break;
-
+                
             case '<':
                 *in = *index;
                 tokens[*index] = NULL;
@@ -53,21 +53,23 @@ void Parser(char buffer[], char* tokens[], int * index, int * again, int * in, i
                 *out = *index;
                 tokens[*index] = NULL;
                 break;
-
-            case '1>':
-                *out = *index;
-                tokens[*index] = NULL;
-                break;
-
-            case '2>':
-                *out = *index;
-                tokens[*index] = NULL;
+                
+            case '1':
+                if (*tokens[*index+1] == '>')
+                {
+                    *out = *index;
+                    tokens[*index] = NULL;
+                }
                 break;
                 
-            case '&>':
-                *out = *index;
-                tokens[*index] = NULL;
+            case '2':
+                if (*tokens[*index+1] == '>')
+                {
+                    *out = *index;
+                    tokens[*index] = NULL;
+                }
                 break;
+                
                 
             case '|':
                 *inout = *index;
@@ -75,9 +77,18 @@ void Parser(char buffer[], char* tokens[], int * index, int * again, int * in, i
                 break;
                 
             case '&':
-                *back = *index;
-                tokens[*index] = NULL;
-                break;
+                if (*tokens[*index+1] == '>')
+                {
+                    *out = *index;
+                    tokens[*index] = NULL;
+                    break;
+                }
+                else
+                {
+                    *back = *index;
+                    tokens[*index] = NULL;
+                    break;
+                }
         }
         (*index)++;
     }
